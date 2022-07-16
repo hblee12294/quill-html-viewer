@@ -5,7 +5,7 @@ import 'highlight.js/styles/github.css'
 // import 'highlight.js/styles/monokai.css'
 import pretty from 'pretty'
 
-import styles from './Highlighter.module.css'
+import './Highlighter.css'
 
 hljs.registerLanguage('xml', xml)
 
@@ -28,7 +28,7 @@ export const Highlighter: FC<HighlighterProps> = ({ children }) => {
   }, [children])
 
   return (
-    <pre className={styles.pre}>
+    <pre className="Highlighter-pre">
       <code ref={codeRef} className="hljs" dangerouslySetInnerHTML={{ __html: htmlContent }}></code>
     </pre>
   )
