@@ -31,7 +31,7 @@ function App() {
       modules: {
         toolbar: toolbarOptions,
       },
-      placeholder: 'Your contents here',
+      placeholder: 'Type here ...',
       theme: 'snow', // or 'bubble'
     })
 

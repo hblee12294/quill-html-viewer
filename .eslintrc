@@ -1,0 +1,14 @@
+{
+  "extends": ["react-app", "eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
+  "env": {
+    "es2020": true,
+    "browser": true,
+    "jest": true,
+    "worker": true
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-empty": "warn"
+  }
+}
