@@ -4,6 +4,20 @@ import Quill from 'quill'
 import './App.css'
 import { Highlighter } from './components'
 
+const toolbarOptions = [
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+  ['bold', 'italic', 'underline', 'strike', { script: 'sub' }, { script: 'super' }], // toggled buttons
+
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+
+  [{ list: 'ordered' }, { list: 'bullet' }],
+
+  ['blockquote', 'code-block', 'link', 'image'],
+
+  ['clean'], // remove formatting button
+]
+
 function App() {
   const quillContainerRef = useRef<HTMLDivElement>(null)
   const quillRef = useRef<Quill>()
@@ -15,9 +29,9 @@ function App() {
 
     const quill = new Quill(quillContainerRef.current, {
       modules: {
-        toolbar: [[{ header: [1, 2, false] }], ['bold', 'italic', 'underline'], ['image', 'code-block']],
+        toolbar: toolbarOptions,
       },
-      placeholder: 'Compose an epic...',
+      placeholder: 'Your contents here',
       theme: 'snow', // or 'bubble'
     })
 
