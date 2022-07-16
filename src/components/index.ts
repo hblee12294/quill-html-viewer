@@ -1,1 +1,2 @@
-export { Highlighter } from './Highlighter'
+export { Highlighter } from './Highlighter/Highlighter'
+export { Button } from './Button/Button'

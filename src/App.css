@@ -11,8 +11,26 @@
 .editor {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-right: 1px solid #ddd;
 }
 
 .display {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  overflow: hidden;
+}
+
+.quill-container {
+  overflow: auto;
+}
+
+.ql-toolbar.ql-snow {
+  border: none;
+}
+
+.ql-container.ql-snow {
+  border: none;
 }
