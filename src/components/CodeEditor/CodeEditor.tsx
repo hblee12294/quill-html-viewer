@@ -32,7 +32,7 @@ export function CodeEditor({ value, onChange }: CodeEditorProps) {
         </Button>
       </div>
 
-      <Editor defaultLanguage="HTML" value={value} onChange={handleEditorChange} />
+      <Editor defaultLanguage="html" value={value} onChange={handleEditorChange} />
     </>
   )
 }
