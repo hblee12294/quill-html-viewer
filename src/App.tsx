@@ -1,8 +1,8 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, useCallback } from 'react'
 import Quill from 'quill'
 
 import './App.css'
-import { Highlighter } from './components'
+import { CodeEditor } from './components'
 
 const toolbarOptions = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -42,6 +42,15 @@ function App() {
     quillRef.current = quill
   }, [])
 
+  const onCodeEditorChange = useCallback((value: string) => {
+    const quill = quillRef.current
+    if (!quill) return
+
+    quill.enable(false)
+    quill.clipboard.dangerouslyPasteHTML(value, 'silent')
+    quill.enable(true)
+  }, [])
+
   return (
     <div className="wrap">
       <div className="editor">
@@ -49,7 +58,7 @@ function App() {
       </div>
 
       <div className="display">
-        <Highlighter>{htmlContent}</Highlighter>
+        <CodeEditor value={htmlContent} onChange={onCodeEditorChange}></CodeEditor>
       </div>
     </div>
   )
