@@ -1,5 +1,5 @@
-import { useCallback } from 'react'
-import Editor, { OnChange } from '@monaco-editor/react'
+import { useEffect, useCallback, useRef } from 'react'
+import Editor, { OnMount, OnChange, Monaco } from '@monaco-editor/react'
 
 import './CodeEditor.css'
 import { ReactComponent as Copy } from '../../assets/copy.svg'
@@ -11,10 +11,29 @@ interface CodeEditorProps {
 }
 
 export function CodeEditor({ value, onChange }: CodeEditorProps) {
+  const monacoRef = useRef<Monaco>()
+
+  useEffect(() => {
+    const monaco = monacoRef.current
+
+    if (monaco) {
+      const editor = monaco.editor.getEditors()[0]!
+      editor.trigger('editor', 'editor.action.formatDocument', undefined)
+    }
+  }, [value])
+
+  const handleEditorDidMount: OnMount = (editor, monaco) => {
+    monacoRef.current = monaco
+  }
+
   const handleEditorChange: OnChange = useCallback(
-    (val) => {
+    (val, e) => {
       if (val) {
-        onChange(val)
+        const autoFormat = (e.changes[0] as any).forceMoveMarkers
+
+        if (!autoFormat) {
+          onChange(val)
+        }
       }
     },
     [onChange],
@@ -32,7 +51,16 @@ export function CodeEditor({ value, onChange }: CodeEditorProps) {
         </Button>
       </div>
 
-      <Editor defaultLanguage="html" value={value} onChange={handleEditorChange} />
+      <Editor
+        defaultLanguage="html"
+        value={value}
+        onMount={handleEditorDidMount}
+        onChange={handleEditorChange}
+        options={{
+          formatOnType: true,
+          formatOnPaste: true,
+        }}
+      />
     </>
   )
 }
